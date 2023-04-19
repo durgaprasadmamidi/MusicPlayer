@@ -77,6 +77,9 @@ function updateProgress(e){
     const {duration,currentTime} = e.srcElement;
     const progressPercent = (currentTime/duration)*100; 
     progress.style.width = `${progressPercent}%`;
+    if(progressPercent === 100){
+        pauseSong();
+    }
 }
 
 function setProgress(e){
@@ -86,11 +89,6 @@ function setProgress(e){
     audio.currentTime = (clickX/width)*duration;
 }
 
-function checkSongStatus(){
-    if(progress.style.width === '100%'){
-        pauseSong();
-    }
-}
 
 function init(){
 
@@ -100,7 +98,7 @@ function init(){
     
     audio.addEventListener('timeupdate', updateProgress);
     progressContainer.addEventListener('click', setProgress);
-    setInterval(checkSongStatus,1000);
+
 }
 
 
